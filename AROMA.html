@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aroma &amp; Co. — Coffee, Bakery &amp; Delivery</title>
+<meta name="description" content="Aroma &amp; Co.: specialty coffee, fresh pastries and breakfast. Order online for delivery or pickup.">
+<style>
+:root{--green:#1d3b2a;--green2:#2a5640;--cream:#f6f0e4;--paper:#fffaf0;--orange:#ef6a3b;--yellow:#f7c948;--ink:#1c2620;--muted:#66746b;--r:22px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--cream);color:var(--ink);font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;line-height:1.55;overflow-x:hidden}
+h1,h2,h3{font-weight:800;letter-spacing:-.03em;line-height:1.05}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:40;background:var(--cream);border-bottom:2px solid var(--ink)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-.04em}.logo b{color:var(--orange)}
+nav ul{display:flex;gap:22px;list-style:none;align-items:center}
+nav a.link{font-weight:700;font-size:.92rem}nav a.link:hover{color:var(--orange)}
+.cartbtn{display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--ink);color:#fff;border:0;border-radius:40px;padding:10px 18px;font-weight:700;font-size:.9rem;transition:transform .25s}
+.cartbtn:hover{transform:scale(1.05)}.cartbtn .n{background:var(--orange);border-radius:20px;min-width:22px;height:22px;display:grid;place-items:center;font-size:.78rem;padding:0 6px}
+.cartbtn.bump{animation:bump .4s}@keyframes bump{50%{transform:scale(1.18)}}
+.burger{display:none;background:none;border:0;font-size:1.7rem;cursor:pointer}
+.btn{display:inline-block;cursor:pointer;border:2px solid var(--ink);background:var(--orange);color:#fff;border-radius:40px;padding:13px 28px;font-weight:800;font-size:.95rem;box-shadow:4px 4px 0 var(--ink);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.alt{background:var(--yellow);color:var(--ink)}.btn.wide{width:100%;text-align:center}
+.btn[disabled]{opacity:.6;cursor:wait}
+.hero{background:var(--green);color:var(--cream);padding:70px 0 90px;border-bottom:2px solid var(--ink);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+.tag{display:inline-block;background:var(--yellow);color:var(--ink);border-radius:30px;padding:5px 14px;font-weight:800;font-size:.78rem;margin-bottom:18px}
+h1{font-size:clamp(2.6rem,7vw,5.2rem)}h1 span{color:var(--yellow)}
+.hero p{max-width:470px;margin:18px 0 28px;color:#cfe0d3;font-size:1.05rem}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.collage{position:relative;height:340px}
+.blob{position:absolute;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ink);animation:fl 6s ease-in-out infinite}
+.blob svg{width:78%}
+.b1{width:230px;height:230px;background:#f3d9b1;left:8%;top:6%}
+.b2{width:160px;height:160px;background:#fbd5d0;right:2%;top:0;animation-delay:-2s}
+.b3{width:170px;height:170px;background:#d7e8c4;right:12%;bottom:0;animation-delay:-4s}
+@keyframes fl{50%{transform:translateY(-12px) rotate(2deg)}}
+.steps{margin-top:-40px;position:relative;z-index:2}
+.steps .g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{background:var(--paper);border:2px solid var(--ink);border-radius:var(--r);padding:22px;box-shadow:5px 5px 0 var(--ink);display:flex;gap:14px;align-items:center}
+.step .ic{font-size:2rem}.step b{display:block;font-size:1.05rem}.step small{color:var(--muted)}
+section{padding:80px 0}
+.head h2{font-size:clamp(2rem,4.5vw,3.2rem)}.head p{color:var(--muted);margin-top:8px}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 30px}
+.chip{cursor:pointer;background:transparent;border:2px solid var(--ink);border-radius:30px;padding:8px 20px;font-weight:800;font-size:.88rem;transition:.2s}
+.chip:hover{background:var(--yellow)}.chip.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--paper);border:2px solid var(--ink);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s;animation:pop .5s both}
+.card:hover{transform:translateY(-5px);box-shadow:6px 6px 0 var(--ink)}
+@keyframes pop{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pic{height:170px;display:grid;place-items:center;border-bottom:2px solid var(--ink)}
+.pic svg{height:86%}.pic img{width:100%;height:100%;object-fit:cover}
+.cbody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.cbody h3{font-size:1.2rem}.cbody p{color:var(--muted);font-size:.88rem;flex:1}
+.buy{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.price{font-size:1.25rem;font-weight:800}
+.add{cursor:pointer;background:var(--orange);color:#fff;border:2px solid var(--ink);border-radius:30px;padding:7px 16px;font-weight:800;transition:.2s}
+.add:hover{background:var(--yellow);color:var(--ink)}
+.qty{display:flex;align-items:center;gap:4px;border:2px solid var(--ink);border-radius:30px;background:#fff}
+.qty button{cursor:pointer;width:32px;height:32px;border:0;background:none;font-size:1.2rem;font-weight:800;border-radius:50%}
+.qty button:hover{background:var(--yellow)}.qty span{min-width:20px;text-align:center;font-weight:800}
+.about{background:var(--yellow);border-block:2px solid var(--ink)}
+.about .g{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.about h3{font-size:1.5rem;margin-bottom:6px}.about p{font-size:.95rem}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}
+.panel{background:var(--paper);border:2px solid var(--ink);border-radius:var(--r);padding:26px}
+.panel h3{font-size:1.5rem;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #b9b19d}
+.panel a.l{display:block;padding:9px 0;border-bottom:1px dashed #b9b19d;font-weight:700}.panel a.l:hover{color:var(--orange)}
+footer{background:var(--ink);color:#cfd8d2;text-align:center;padding:26px 0;font-size:.85rem}
+footer button{background:none;border:0;color:var(--yellow);cursor:pointer;font:inherit;font-weight:700;margin-left:8px}
+.tools{display:flex;gap:6px;align-items:center}
+.tools select{width:auto;padding:7px 8px;border-radius:20px;font-weight:800;font-size:.8rem;cursor:pointer;background:#fff}
+#payLink{margin-top:18px}
+/* drawer */
+.ov{position:fixed;inset:0;background:rgba(15,25,20,.55);opacity:0;visibility:hidden;transition:.3s;z-index:90}
+.ov.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--cream);border-left:2px solid var(--ink);z-index:100;transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:2px solid var(--ink)}
+.dh h3{font-size:1.5rem}.x{background:none;border:0;font-size:2rem;cursor:pointer;line-height:1}
+.db{flex:1;overflow:auto;padding:18px 22px}
+.df{border-top:2px solid var(--ink);padding:16px 22px;background:var(--paper)}
+.view{display:none}.view.on{display:block}
+.line{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px dashed #b9b19d}
+.line .t{width:54px;height:54px;border-radius:14px;border:2px solid var(--ink);display:grid;place-items:center;flex:none}.line .t svg{height:82%}
+.line .m{flex:1;font-weight:700;font-size:.95rem}.line .m small{display:block;color:var(--muted);font-weight:400}
+.sum div{display:flex;justify-content:space-between;padding:3px 0}.sum .tot{font-size:1.2rem;font-weight:800;border-top:2px solid var(--ink);margin-top:6px;padding-top:8px}
+.note{font-size:.82rem;color:var(--muted);margin:8px 0}
+.empty{text-align:center;color:var(--muted);padding:40px 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.seg button{cursor:pointer;padding:11px;border:2px solid var(--ink);border-radius:14px;background:#fff;font-weight:800}
+.seg button.on{background:var(--ink);color:#fff}
+label{display:block;font-size:.78rem;font-weight:800;margin:12px 0 4px}
+input,select{width:100%;border:2px solid var(--ink);border-radius:12px;background:#fff;padding:11px 12px;font:inherit;outline:none}
+input:focus,select:focus{box-shadow:0 0 0 3px var(--yellow)}
+.bad{border-color:#c0392b}.err{color:#c0392b;font-size:.78rem;min-height:1em}.formerr{text-align:center;margin-top:8px}
+.done{text-align:center;padding:30px 0}.done .big{font-size:3.4rem}
+.back{background:none;border:0;cursor:pointer;font-weight:800;margin-bottom:6px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,40px);background:var(--ink);color:#fff;padding:11px 20px;border-radius:30px;font-weight:700;font-size:.88rem;opacity:0;transition:.35s;z-index:120;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+ .hero .wrap,.cg,.about .g,.steps .g{grid-template-columns:1fr}
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .collage{height:270px}.b1{width:180px;height:180px}.b2{width:120px;height:120px}.b3{width:130px;height:130px}
+ .burger{display:block}
+ nav ul{position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--cream);border-bottom:2px solid var(--ink);max-height:0;overflow:hidden;transition:max-height .35s}
+ nav ul.open{max-height:300px}nav li{width:100%;text-align:center;padding:14px 0;border-top:1px solid #d8cfba}
+}
+@media(max-width:560px){.cartbtn .cl{display:none}.tools select{padding:6px 4px;font-size:.75rem}.logo{font-size:1.25rem}.grid{grid-template-columns:1fr}section{padding:60px 0}.pic{height:150px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a href="#home" class="logo">aroma<b>&amp;</b>co</a>
+ <nav><ul id="navList">
+  <li><a class="link" data-i18n="nav_menu" href="#menu">Menu</a></li>
+  <li><a class="link" data-i18n="nav_delivery" href="#delivery">Delivery</a></li>
+  <li><a class="link" data-i18n="nav_visit" href="#contact">Visit</a></li>
+ </ul></nav>
+ <div class="tools"><select id="langSel" aria-label="Language"><option value="en">EN</option><option value="ru">RU</option><option value="uk">UA</option><option value="nl">NL</option></select><select id="curSel" aria-label="Currency"><option value="EUR">€ EUR</option><option value="USD">$ USD</option><option value="UAH">₴ UAH</option></select>
+  <button class="cartbtn" id="cartBtn" aria-label="Open cart">🛒 <span class="cl" data-i18n="cart">Cart</span> <span class="n" id="cartN">0</span></button>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+ </div>
+</div></header>
+
+<main id="home">
+<div class="hero"><div class="wrap">
+ <div class="rv">
+  <span class="tag" data-i18n="tag">☕ Coffee, bakery &amp; breakfast</span>
+  <h1 data-i18n-html="h1">Good coffee,<br><span>delivered warm.</span></h1>
+  <p data-i18n="hero_p">Order your favourites online. We’ll bring them to your door in about 35 minutes, or have them ready for pickup.</p>
+  <div class="cta"><a class="btn alt" data-i18n="order_now" href="#menu">Order now</a><a class="btn" data-i18n="how" href="#delivery" style="background:transparent;color:#fff;border-color:#fff;box-shadow:none">How delivery works</a></div>
+ </div>
+ <div class="collage rv" id="collage" aria-hidden="true"></div>
+</div></div>
+
+<div class="wrap steps rv" id="delivery"><div class="g">
+ <div class="step"><span class="ic">📱</span><div><b data-i18n="s1b">1. Pick your order</b><small data-i18n="s1s">Add dishes to your cart</small></div></div>
+ <div class="step"><span class="ic">👩‍🍳</span><div><b data-i18n="s2b">2. We prepare it</b><small data-i18n="s2s">Fresh, never reheated</small></div></div>
+ <div class="step"><span class="ic">🛵</span><div><b data-i18n="s3b">3. At your door</b><small id="feeInfo"></small></div></div>
+</div></div>
+
+<section id="menu"><div class="wrap">
+ <div class="head rv"><h2 data-i18n="menu_h">The menu</h2><p data-i18n="menu_p">Tap “Add” and we’ll do the rest.</p></div>
+ <div class="chips" id="chips">
+  <button class="chip on" data-cat="all" data-i18n="all">All</button><button class="chip" data-cat="coffee" data-i18n="coffee">Coffee</button><button class="chip" data-cat="bakery" data-i18n="bakery">Bakery</button><button class="chip" data-cat="breakfast" data-i18n="breakfast">Breakfast</button>
+ </div>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="about"><div class="wrap"><div class="g">
+ <div class="rv"><h3 data-i18n="ab1h">🌱 Roasted with care</h3><p data-i18n="ab1p">Small-batch beans from ethical farms, roasted every week.</p></div>
+ <div class="rv"><h3 data-i18n="ab2h">🥐 Baked at dawn</h3><p data-i18n="ab2p">Croissants and cakes made in-house, every single morning.</p></div>
+ <div class="rv"><h3 data-i18n="ab3h">🤝 Local first</h3><p data-i18n="ab3p">We work with neighbourhood farms and suppliers.</p></div>
+</div></div></section>
+
+<section id="contact"><div class="wrap">
+ <div class="head rv"><h2 data-i18n="visit_h">Come say hi</h2></div>
+ <div class="cg">
+  <div class="panel rv"><h3 data-i18n="hours_h">Opening hours</h3>
+   <div class="row"><span data-i18n="monfri">Mon – Fri</span><b>07:30 – 19:00</b></div>
+   <div class="row"><span data-i18n="sat">Saturday</span><b>08:30 – 20:00</b></div>
+   <div class="row"><span data-i18n="sun">Sunday</span><b>09:00 – 17:00</b></div>
+   <div class="row"><span data-i18n="deliv">Delivery</span><b>09:00 – 20:00</b></div>
+  </div>
+  <div class="panel rv"><h3 data-i18n="contact_h">Contact</h3>
+   <a class="l" href="tel:+310000000000">📞 +31 00 000 0000</a>
+   <a class="l" href="mailto:hello@aromaco.example">✉️ hello@aromaco.example</a>
+   <a class="l" href="https://maps.google.com/?q=Kerkrade" target="_blank" rel="noopener">📍 Example Street 12, Kerkrade</a>
+   <a class="l" data-i18n="reserve" href="tel:+310000000000">🍽️ Reserve a table: call us</a>
+  </div>
+ </div>
+</div></section>
+</main>
+<footer>© <span id="yr"></span> Aroma &amp; Co. <button id="top" data-i18n="top">↑ Back to top</button></footer>
+
+<div class="ov" id="ov"></div>
+<aside class="drawer" id="drawer" aria-label="Your order" aria-hidden="true">
+ <div class="dh"><h3 id="dTitle">Your cart</h3><button class="x" id="dClose" aria-label="Close">×</button></div>
+ <div class="db">
+  <div class="view on" id="vCart"><div id="lines"></div></div>
+  <div class="view" id="vForm">
+   <button class="back" id="backBtn" data-i18n="back">← Back to cart</button>
+   <div class="seg"><button class="on" data-mode="Delivery" data-i18n="m_Delivery">🛵 Delivery</button><button data-mode="Pickup" data-i18n="m_Pickup">🛍️ Pickup</button></div>
+   <form id="form" novalidate>
+    <label for="name" data-i18n="l_name">Name</label><input id="name" name="name" autocomplete="name"><div class="err" data-for="name"></div>
+    <label for="phone" data-i18n="l_phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"><div class="err" data-for="phone"></div>
+    <div id="addrBox"><label for="address" data-i18n="l_addr">Delivery address</label><input id="address" name="address" autocomplete="street-address"><div class="err" data-for="address"></div></div>
+    <label for="pay" data-i18n="l_pay">Payment</label><select id="pay" name="payment"></select>
+    <label for="comment" data-i18n="l_comment">Comment (optional)</label><input id="comment" name="comment">
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+    <div class="err formerr" id="formErr" role="alert"></div>
+   </form>
+  </div>
+  <div class="view" id="vDone"><div class="done"><div class="big">🎉</div><h3 data-i18n="done_h">Order received!</h3><p class="note" id="doneText"></p><a class="btn" id="payLink" target="_blank" rel="noopener" style="display:none"></a><br><button class="btn alt" id="doneBtn" style="margin-top:14px" data-i18n="close">Close</button></div></div>
+ </div>
+ <div class="df" id="foot">
+  <div class="sum" id="sum"></div>
+  <div class="note" id="minNote"></div>
+  <button class="btn wide" id="mainBtn">Checkout</button>
+ </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+// ===== SETTINGS =====
+ var FORM_ENDPOINT='';            // paste your Formspree URL: https://formspree.io/f/xxxx
+ var CAFE_EMAIL='hello@aromaco.example';
+ // Prices in the menu are in EUR (base currency)
+ var FEE=2.5, FREE_FROM=25, MIN_DELIVERY=10;
+ // Exchange rates: how much of each currency you get for 1 EUR. Update from time to time!
+ var RATES={EUR:1,USD:1.08,UAH:48};
+ // Payment methods. "only" = show only for these currencies.
+ var PAYMENTS=[{id:'cash'},{id:'cardoff'},{id:'card'},{id:'paypal'},{id:'ideal',only:['EUR']}];
+ // Online payment links. {amount} and {currency} are replaced automatically.
+ // Examples: PayPal -> 'https://paypal.me/YOURNAME/{amount}{currency}'
+ //           Mollie / Stripe / LiqPay / WayForPay / Monobank payment page URL
+ // Empty = the cafe sends the customer a payment link after the order.
+ var PAY_LINKS={card:'',paypal:'',ideal:''};
+ // Serverless function that creates a Stripe Checkout payment (see README). Empty = old behaviour.
+ var CHECKOUT_API='/.netlify/functions/create-checkout';
+ var ICON={cash:'💵',cardoff:'💳',card:'🔒',paypal:'🅿️',ideal:'🏦'};
+ var LOC={en:'en-GB',ru:'ru-RU',uk:'uk-UA',nl:'nl-NL'};
+
+ // ===== Translations =====
+ var T={
+ en:{title:'Aroma & Co. — Coffee, Bakery & Delivery',meta:'Specialty coffee, fresh pastries and breakfast. Order online for delivery or pickup.',
+  nav_menu:'Menu',nav_delivery:'Delivery',nav_visit:'Visit',cart:'Cart',
+  tag:'☕ Coffee, bakery & breakfast',h1:'Good coffee,<br><span>delivered warm.</span>',
+  hero_p:'Order your favourites online. We’ll bring them to your door in about 35 minutes, or have them ready for pickup.',
+  order_now:'Order now',how:'How delivery works',
+  s1b:'1. Pick your order',s1s:'Add dishes to your cart',s2b:'2. We prepare it',s2s:'Fresh, never reheated',s3b:'3. At your door',
+  fee_info:'Delivery {fee} · free from {free}',menu_h:'The menu',menu_p:'Tap “Add” and we’ll do the rest.',
+  all:'All',coffee:'Coffee',bakery:'Bakery',breakfast:'Breakfast',
+  ab1h:'🌱 Roasted with care',ab1p:'Small-batch beans from ethical farms, roasted every week.',
+  ab2h:'🥐 Baked at dawn',ab2p:'Croissants and cakes made in-house, every single morning.',
+  ab3h:'🤝 Local first',ab3p:'We work with neighbourhood farms and suppliers.',
+  visit_h:'Come say hi',hours_h:'Opening hours',monfri:'Mon – Fri',sat:'Saturday',sun:'Sunday',deliv:'Delivery',contact_h:'Contact',reserve:'🍽️ Reserve a table: call us',top:'↑ Back to top',
+  cart_t:'Your cart',checkout_t:'Checkout',thanks_t:'Thank you',back:'← Back to cart',m_Delivery:'🛵 Delivery',m_Pickup:'🛍️ Pickup',
+  l_name:'Name',l_phone:'Phone',l_addr:'Delivery address',l_pay:'Payment',l_comment:'Comment (optional)',
+  add:'Add +',empty:'🛒<br>Your cart is empty.<br>Pick something tasty from the menu!',
+  subtotal:'Subtotal',row_Delivery:'Delivery',row_Pickup:'Pickup',free:'Free',total:'Total',
+  min_note:'Minimum order for delivery is {min}. Add {more} more or choose pickup.',free_note:'Add {more} more for free delivery.',min_toast:'Minimum delivery order is {min}',
+  checkout:'Checkout',place:'Place order',sending:'Sending…',
+  e_name:'Please enter your name.',e_phone:'Please enter a valid phone number.',e_addr:'Please enter your delivery address.',e_send:'Sorry, we could not send your order. Please try again or call us.',
+  done_h:'Order received!',done_p:'Thanks! We’ve got your {mode} order ({total}). We will call you to confirm.',ml_Delivery:'delivery',ml_Pickup:'pickup',
+  pay_now:'Pay {total} online',pay_soon:'We’ll send you a payment link shortly.',close:'Close',
+  p_cash:'Cash',p_cardoff:'Card on delivery / pickup',p_card:'Credit / debit card (online)',p_paypal:'PayPal',p_ideal:'iDEAL',remove1:'Remove one',add1:'Add one'},
+ ru:{title:'Aroma & Co. — Кофе, выпечка и доставка',meta:'Спешиал-кофе, свежая выпечка и завтраки. Заказывайте онлайн с доставкой или самовывозом.',
+  nav_menu:'Меню',nav_delivery:'Доставка',nav_visit:'Контакты',cart:'Корзина',
+  tag:'☕ Кофе, выпечка и завтраки',h1:'Хороший кофе,<br><span>доставим горячим.</span>',
+  hero_p:'Заказывайте любимые блюда онлайн. Привезём к двери примерно за 35 минут или приготовим к самовывозу.',
+  order_now:'Заказать',how:'Как работает доставка',
+  s1b:'1. Выберите заказ',s1s:'Добавьте блюда в корзину',s2b:'2. Мы готовим',s2s:'Свежее, без подогрева',s3b:'3. У вашей двери',
+  fee_info:'Доставка {fee} · бесплатно от {free}',menu_h:'Меню',menu_p:'Нажмите «Добавить», остальное — наша забота.',
+  all:'Все',coffee:'Кофе',bakery:'Выпечка',breakfast:'Завтраки',
+  ab1h:'🌱 Обжарка с заботой',ab1p:'Зерно малых партий с этичных ферм, обжариваем каждую неделю.',
+  ab2h:'🥐 Печём на рассвете',ab2p:'Круассаны и десерты готовим сами, каждое утро.',
+  ab3h:'🤝 Сначала местные',ab3p:'Работаем с окрестными фермами и поставщиками.',
+  visit_h:'Заходите в гости',hours_h:'Часы работы',monfri:'Пн – Пт',sat:'Суббота',sun:'Воскресенье',deliv:'Доставка',contact_h:'Контакты',reserve:'🍽️ Забронировать стол: позвоните нам',top:'↑ Наверх',
+  cart_t:'Ваша корзина',checkout_t:'Оформление',thanks_t:'Спасибо',back:'← Назад в корзину',m_Delivery:'🛵 Доставка',m_Pickup:'🛍️ Самовывоз',
+  l_name:'Имя',l_phone:'Телефон',l_addr:'Адрес доставки',l_pay:'Оплата',l_comment:'Комментарий (необязательно)',
+  add:'Добавить +',empty:'🛒<br>Корзина пуста.<br>Выберите что-нибудь вкусное из меню!',
+  subtotal:'Сумма',row_Delivery:'Доставка',row_Pickup:'Самовывоз',free:'Бесплатно',total:'Итого',
+  min_note:'Минимальный заказ для доставки — {min}. Добавьте ещё {more} или выберите самовывоз.',free_note:'Добавьте ещё {more} для бесплатной доставки.',min_toast:'Минимальный заказ для доставки — {min}',
+  checkout:'Оформить',place:'Подтвердить заказ',sending:'Отправка…',
+  e_name:'Введите ваше имя.',e_phone:'Введите корректный номер телефона.',e_addr:'Введите адрес доставки.',e_send:'Не удалось отправить заказ. Попробуйте ещё раз или позвоните нам.',
+  done_h:'Заказ принят!',done_p:'Спасибо! Мы получили ваш заказ ({mode}) на {total}. Мы позвоним для подтверждения.',ml_Delivery:'доставка',ml_Pickup:'самовывоз',
+  pay_now:'Оплатить {total} онлайн',pay_soon:'Скоро пришлём вам ссылку для оплаты.',close:'Закрыть',
+  p_cash:'Наличные',p_cardoff:'Картой при получении',p_card:'Банковская карта (онлайн)',p_paypal:'PayPal',p_ideal:'iDEAL',remove1:'Убрать одну',add1:'Добавить одну',
+  d:{esp:['Эспрессо','Насыщенный, короткий и крепкий'],cap:['Капучино','Бархатистая молочная пена'],lat:['Латте','Нежный и сливочный'],fw:['Флэт уайт','Двойной шот, шелковистое молоко'],cb:['Колд брю','Настаивается 18 часов'],hc:['Горячий шоколад','Бельгийское какао, маршмеллоу'],
+   cr:['Масляный круассан','Печём на рассвете'],ch:['Чизкейк','С ягодным компотом'],ti:['Тирамису','Классический, домашний'],br:['Шоколадный брауни','Тёплый, с морской солью'],cn:['Булочка с корицей','Глазурь из сливочного сыра'],lt:['Лимонный тарт','Кисло-сладкий'],
+   at:['Тост с авокадо','Закваска, яйцо пашот'],om:['Омлет','Три яйца, зелень, сыр'],gb:['Гранола-боул','Йогурт, мёд, ягоды'],pc:['Панкейки','Кленовый сироп и масло'],cm:['Крок-месье','Ветчина, сыр, бешамель'],oj:['Свежий апельсиновый сок','Выжимаем под заказ']}},
+ uk:{title:'Aroma & Co. — Кава, випічка та доставка',meta:'Спешіал-кава, свіжа випічка та сніданки. Замовляйте онлайн з доставкою або самовивозом.',
+  nav_menu:'Меню',nav_delivery:'Доставка',nav_visit:'Контакти',cart:'Кошик',
+  tag:'☕ Кава, випічка та сніданки',h1:'Смачна кава,<br><span>доставимо гарячою.</span>',
+  hero_p:'Замовляйте улюблені страви онлайн. Привеземо до дверей приблизно за 35 хвилин або підготуємо для самовивозу.',
+  order_now:'Замовити',how:'Як працює доставка',
+  s1b:'1. Оберіть замовлення',s1s:'Додайте страви до кошика',s2b:'2. Ми готуємо',s2s:'Свіже, без підігріву',s3b:'3. Біля ваших дверей',
+  fee_info:'Доставка {fee} · безкоштовно від {free}',menu_h:'Меню',menu_p:'Натисніть «Додати», решту ми зробимо самі.',
+  all:'Усе',coffee:'Кава',bakery:'Випічка',breakfast:'Сніданки',
+  ab1h:'🌱 Обсмажуємо з турботою',ab1p:'Зерно невеликих партій з етичних ферм, обсмажуємо щотижня.',
+  ab2h:'🥐 Печемо на світанку',ab2p:'Круасани та десерти готуємо самі, щоранку.',
+  ab3h:'🤝 Спершу місцеве',ab3p:'Працюємо з сусідніми фермами та постачальниками.',
+  visit_h:'Завітайте до нас',hours_h:'Години роботи',monfri:'Пн – Пт',sat:'Субота',sun:'Неділя',deliv:'Доставка',contact_h:'Контакти',reserve:'🍽️ Забронювати стіл: зателефонуйте нам',top:'↑ Догори',
+  cart_t:'Ваш кошик',checkout_t:'Оформлення',thanks_t:'Дякуємо',back:'← Назад до кошика',m_Delivery:'🛵 Доставка',m_Pickup:'🛍️ Самовивіз',
+  l_name:'Ім’я',l_phone:'Телефон',l_addr:'Адреса доставки',l_pay:'Оплата',l_comment:'Коментар (необов’язково)',
+  add:'Додати +',empty:'🛒<br>Кошик порожній.<br>Оберіть щось смачне з меню!',
+  subtotal:'Сума',row_Delivery:'Доставка',row_Pickup:'Самовивіз',free:'Безкоштовно',total:'Разом',
+  min_note:'Мінімальне замовлення для доставки — {min}. Додайте ще {more} або оберіть самовивіз.',free_note:'Додайте ще {more} для безкоштовної доставки.',min_toast:'Мінімальне замовлення для доставки — {min}',
+  checkout:'Оформити',place:'Підтвердити замовлення',sending:'Надсилання…',
+  e_name:'Введіть ваше ім’я.',e_phone:'Введіть коректний номер телефону.',e_addr:'Введіть адресу доставки.',e_send:'Не вдалося надіслати замовлення. Спробуйте ще раз або зателефонуйте нам.',
+  done_h:'Замовлення прийнято!',done_p:'Дякуємо! Ми отримали ваше замовлення ({mode}) на {total}. Ми зателефонуємо для підтвердження.',ml_Delivery:'доставка',ml_Pickup:'самовивіз',
+  pay_now:'Сплатити {total} онлайн',pay_soon:'Незабаром надішлемо вам посилання на оплату.',close:'Закрити',
+  p_cash:'Готівка',p_cardoff:'Карткою при отриманні',p_card:'Банківська картка (онлайн)',p_paypal:'PayPal',p_ideal:'iDEAL',remove1:'Прибрати одну',add1:'Додати одну',
+  d:{esp:['Еспресо','Насичений, короткий і міцний'],cap:['Капучино','Оксамитова молочна піна'],lat:['Лате','Ніжний і вершковий'],fw:['Флет вайт','Подвійний шот, шовковисте молоко'],cb:['Колд брю','Настоюється 18 годин'],hc:['Гарячий шоколад','Бельгійське какао, маршмелоу'],
+   cr:['Масляний круасан','Печемо на світанку'],ch:['Чізкейк','З ягідним компотом'],ti:['Тірамісу','Класичний, домашній'],br:['Шоколадний брауні','Теплий, з морською сіллю'],cn:['Булочка з корицею','Глазур із вершкового сиру'],lt:['Лимонний тарт','Кисло-солодкий'],
+   at:['Тост з авокадо','Заквасковий хліб, яйце пашот'],om:['Омлет','Три яйця, зелень, сир'],gb:['Гранола-боул','Йогурт, мед, ягоди'],pc:['Панкейки','Кленовий сироп і масло'],cm:['Крок-мсьє','Шинка, сир, бешамель'],oj:['Свіжий апельсиновий сік','Вичавлюємо на замовлення']}},
+ nl:{title:'Aroma & Co. — Koffie, bakkerij & bezorging',meta:'Specialty koffie, vers gebak en ontbijt. Bestel online voor bezorging of afhalen.',
+  nav_menu:'Menu',nav_delivery:'Bezorging',nav_visit:'Bezoek',cart:'Winkelmand',
+  tag:'☕ Koffie, bakkerij & ontbijt',h1:'Goede koffie,<br><span>warm bezorgd.</span>',
+  hero_p:'Bestel je favorieten online. We brengen ze in ongeveer 35 minuten aan de deur of leggen ze klaar om af te halen.',
+  order_now:'Bestel nu',how:'Zo werkt bezorgen',
+  s1b:'1. Kies je bestelling',s1s:'Voeg gerechten toe aan je mandje',s2b:'2. Wij bereiden het',s2s:'Vers, nooit opgewarmd',s3b:'3. Aan je deur',
+  fee_info:'Bezorging {fee} · gratis vanaf {free}',menu_h:'Het menu',menu_p:'Tik op “Toevoegen” en wij doen de rest.',
+  all:'Alles',coffee:'Koffie',bakery:'Bakkerij',breakfast:'Ontbijt',
+  ab1h:'🌱 Met zorg gebrand',ab1p:'Kleinschalig gebrande bonen van ethische boeren, elke week vers.',
+  ab2h:'🥐 Gebakken bij zonsopgang',ab2p:'Croissants en taarten zelfgemaakt, elke ochtend opnieuw.',
+  ab3h:'🤝 Eerst lokaal',ab3p:'We werken met boeren en leveranciers uit de buurt.',
+  visit_h:'Kom gezellig langs',hours_h:'Openingstijden',monfri:'Ma – Vr',sat:'Zaterdag',sun:'Zondag',deliv:'Bezorging',contact_h:'Contact',reserve:'🍽️ Tafel reserveren: bel ons',top:'↑ Naar boven',
+  cart_t:'Je winkelmand',checkout_t:'Afrekenen',thanks_t:'Bedankt',back:'← Terug naar mand',m_Delivery:'🛵 Bezorgen',m_Pickup:'🛍️ Afhalen',
+  l_name:'Naam',l_phone:'Telefoon',l_addr:'Bezorgadres',l_pay:'Betaling',l_comment:'Opmerking (optioneel)',
+  add:'Toevoegen +',empty:'🛒<br>Je mand is leeg.<br>Kies iets lekkers van het menu!',
+  subtotal:'Subtotaal',row_Delivery:'Bezorging',row_Pickup:'Afhalen',free:'Gratis',total:'Totaal',
+  min_note:'Minimale bestelling voor bezorging is {min}. Voeg nog {more} toe of kies afhalen.',free_note:'Voeg nog {more} toe voor gratis bezorging.',min_toast:'Minimale bestelling voor bezorging is {min}',
+  checkout:'Afrekenen',place:'Bestelling plaatsen',sending:'Versturen…',
+  e_name:'Vul je naam in.',e_phone:'Vul een geldig telefoonnummer in.',e_addr:'Vul je bezorgadres in.',e_send:'Je bestelling kon niet worden verstuurd. Probeer het opnieuw of bel ons.',
+  done_h:'Bestelling ontvangen!',done_p:'Bedankt! We hebben je bestelling ({mode}) van {total} ontvangen. We bellen je ter bevestiging.',ml_Delivery:'bezorging',ml_Pickup:'afhalen',
+  pay_now:'Betaal {total} online',pay_soon:'We sturen je zo een betaallink.',close:'Sluiten',
+  p_cash:'Contant',p_cardoff:'Pinnen bij bezorging / afhalen',p_card:'Creditcard / bankpas (online)',p_paypal:'PayPal',p_ideal:'iDEAL',remove1:'Eén minder',add1:'Eén erbij',
+  d:{esp:['Espresso','Rijk, kort en krachtig'],cap:['Cappuccino','Fluweelzacht melkschuim'],lat:['Latte','Soepel en romig'],fw:['Flat White','Dubbele shot, zijdezachte melk'],cb:['Cold Brew','18 uur getrokken'],hc:['Warme chocolademelk','Belgische cacao, marshmallows'],
+   cr:['Boterkroissant','Vers gebakken bij zonsopgang'],ch:['Cheesecake','Met bessencompote'],ti:['Tiramisu','Klassiek, huisgemaakt'],br:['Chocoladebrownie','Warm, met zeezout'],cn:['Kaneelbroodje','Glazuur van roomkaas'],lt:['Citroentaart','Scherp en zoet'],
+   at:['Avocadotoast','Zuurdesem, gepocheerd ei'],om:['Omelet','Drie eieren, kruiden, kaas'],gb:['Granolakom','Yoghurt, honing, bessen'],pc:['Pannenkoekjes','Ahornsiroop en boter'],cm:['Croque Monsieur','Ham, kaas, bechamel'],oj:['Verse sinaasappelsap','Op bestelling geperst']}}
+ };
+
+ var $=function(s,r){return (r||document).querySelector(s)};
+ var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+ function esc(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+ function save(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+ var lang=load('lang');
+ if(!T[lang]){var nv=(navigator.language||'en').slice(0,2).toLowerCase();lang=T[nv]?nv:'en'}
+ var cur=load('cur');
+ if(!RATES[cur])cur=lang==='uk'?'UAH':'EUR';
+ function t(k,p){var s=T[lang][k];if(s===undefined)s=T.en[k];if(s===undefined)s=k;if(p)for(var x in p)s=s.split('{'+x+'}').join(p[x]);return s}
+ // convert EUR price to selected currency (UAH rounded to whole hryvnias)
+ function cv(n){var r=n*RATES[cur];return cur==='UAH'?Math.round(r):Math.round(r*100)/100}
+ function money(n){
+  var fd=cur==='UAH'?0:2;
+  try{return new Intl.NumberFormat(LOC[lang],{style:'currency',currency:cur,minimumFractionDigits:fd,maximumFractionDigits:fd}).format(n)}
+  catch(e){return n.toFixed(fd)+' '+cur}
+ }
+ $('#yr').textContent=new Date().getFullYear();
+
+  // ===== Illustrations (replace by a real photo: add photo:'img/latte.jpg' to a dish) =====
+ function art(a){
+  var t=a[0],c=a[1],d=a[2],e=a[3],o='<ellipse cx="60" cy="90" rx="44" ry="6" fill="#0002"/>';
+  if(t==='cup')o+='<path d="M26 42h60v14c0 18-12 28-30 28S26 74 26 56z" fill="#fff" stroke="#1c2620" stroke-width="3"/><path d="M86 48c14-2 14 18-2 20" fill="none" stroke="#1c2620" stroke-width="5" stroke-linecap="round"/><ellipse cx="56" cy="42" rx="30" ry="7" fill="'+c+'" stroke="#1c2620" stroke-width="3"/>'+(d==='m'?'<circle cx="46" cy="41" r="4" fill="#fff"/><circle cx="58" cy="43" r="4" fill="#fff"/><circle cx="68" cy="41" r="3" fill="#fff"/>':d?'<path d="M44 42c8-5 16-5 24 0-8 4-16 4-24 0z" fill="'+d+'"/>':'')+'<path d="M44 28c-6-7 6-9 0-16M58 28c-6-7 6-9 0-16M72 28c-6-7 6-9 0-16" fill="none" stroke="#1c2620" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>';
+  if(t==='glass')o+='<path d="M38 14h44l-6 72H44z" fill="#fff7" stroke="#1c2620" stroke-width="3"/><path d="M41 36h38l-3.5 48h-31z" fill="'+c+'"/>'+(d?'<rect x="47" y="42" width="15" height="15" rx="3" fill="#fffb" transform="rotate(12 54 50)"/><rect x="62" y="58" width="14" height="14" rx="3" fill="#fffb" transform="rotate(-10 69 65)"/>':'')+'<path d="M68 4l-7 42" stroke="#ef6a3b" stroke-width="5" stroke-linecap="round"/>';
+  if(t==='croissant')o+='<path d="M10 68c2-30 24-44 50-44s48 14 50 44c-8-8-14-6-20 0-6-8-14-8-20 0-6-8-14-8-20 0-6-6-12-8-20 0z" fill="#e0a04a" stroke="#1c2620" stroke-width="3" stroke-linejoin="round"/><path d="M40 32l5 32M60 28v34M80 32l-5 32" stroke="#a9651e" stroke-width="3" fill="none" stroke-linecap="round"/>';
+  if(t==='slice'){o+='<rect x="18" y="68" width="84" height="14" rx="5" fill="'+e+'" stroke="#1c2620" stroke-width="3"/><rect x="18" y="48" width="84" height="20" fill="'+d+'" stroke="#1c2620" stroke-width="3"/><rect x="18" y="30" width="84" height="18" rx="6" fill="'+c+'" stroke="#1c2620" stroke-width="3"/>';if(a[4]==='b')o+='<circle cx="40" cy="26" r="6" fill="#c0304a"/><circle cx="62" cy="24" r="6" fill="#8a2a6a"/><circle cx="82" cy="27" r="6" fill="#c0304a"/>';}
+  if(t==='brownie')o+='<rect x="24" y="36" width="72" height="46" rx="9" fill="#4a2a1a" stroke="#1c2620" stroke-width="3"/><rect x="24" y="36" width="72" height="16" rx="9" fill="#6b3d27" stroke="#1c2620" stroke-width="3"/><circle cx="44" cy="44" r="2" fill="#fff"/><circle cx="64" cy="42" r="2" fill="#fff"/><circle cx="80" cy="46" r="2" fill="#fff"/>';
+  if(t==='roll')o+='<circle cx="60" cy="52" r="38" fill="#e5a65c" stroke="#1c2620" stroke-width="3"/><path d="M60 52c4-6 12-4 12 4s-12 14-20 6-6-26 10-30 36 4 36 28" stroke="#a9651e" fill="none" stroke-width="5" stroke-linecap="round"/><path d="M32 40c10 6 20-4 30 2s22-6 30 2" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>';
+  if(t==='toast')o+='<circle cx="60" cy="54" r="40" fill="#fff" stroke="#1c2620" stroke-width="3"/><rect x="30" y="34" width="60" height="42" rx="12" fill="#e0b070" stroke="#1c2620" stroke-width="3"/><rect x="36" y="40" width="48" height="30" rx="8" fill="#9ccc5c"/><circle cx="60" cy="55" r="12" fill="#fff"/><circle cx="60" cy="55" r="6" fill="#f7c948"/>';
+  if(t==='omelette')o+='<circle cx="60" cy="54" r="42" fill="#fff" stroke="#1c2620" stroke-width="3"/><path d="M26 58c0-20 20-28 34-28s34 8 34 28c0 6-14 10-34 10S26 64 26 58z" fill="#f7c948" stroke="#1c2620" stroke-width="3"/><circle cx="46" cy="52" r="3" fill="#5aa04a"/><circle cx="66" cy="48" r="3" fill="#5aa04a"/><circle cx="78" cy="56" r="3" fill="#e0603a"/>';
+  if(t==='bowl')o+='<path d="M16 46h88c0 28-18 42-44 42S16 74 16 46z" fill="#fff" stroke="#1c2620" stroke-width="3"/><ellipse cx="60" cy="46" rx="44" ry="10" fill="#e8d3a5" stroke="#1c2620" stroke-width="3"/><circle cx="44" cy="42" r="6" fill="#c0304a"/><circle cx="62" cy="40" r="6" fill="#6a3a8a"/><circle cx="78" cy="43" r="6" fill="#c0304a"/>';
+  if(t==='pancakes')o+='<ellipse cx="60" cy="72" rx="42" ry="10" fill="#fff" stroke="#1c2620" stroke-width="3"/><ellipse cx="60" cy="64" rx="34" ry="9" fill="#d9954a" stroke="#1c2620" stroke-width="3"/><ellipse cx="60" cy="52" rx="34" ry="9" fill="#e6a85c" stroke="#1c2620" stroke-width="3"/><ellipse cx="60" cy="40" rx="34" ry="9" fill="#d9954a" stroke="#1c2620" stroke-width="3"/><path d="M30 40c10 10 16-2 30 6s24-4 30 0" stroke="#8a4a1c" stroke-width="6" fill="none" stroke-linecap="round"/><rect x="52" y="30" width="16" height="9" rx="2" fill="#f7e08a" stroke="#1c2620" stroke-width="2"/>';
+  if(t==='croque')o+='<rect x="22" y="24" width="76" height="18" rx="8" fill="#e0b070" stroke="#1c2620" stroke-width="3"/><rect x="16" y="42" width="88" height="9" fill="#f1a1a1" stroke="#1c2620" stroke-width="2"/><rect x="22" y="51" width="76" height="9" fill="#f7c948" stroke="#1c2620" stroke-width="2"/><rect x="22" y="60" width="76" height="20" rx="8" fill="#e0b070" stroke="#1c2620" stroke-width="3"/>';
+  return '<svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'+o+'</svg>';
+ }
+ var BG={coffee:'#f3d9b1',bakery:'#fbd5d0',breakfast:'#d7e8c4'};
+ var DISHES=[
+  {id:'esp',cat:'coffee',name:'Espresso',desc:'Rich, short and bold',price:2.5,art:['cup','#3b1f12','']},
+  {id:'cap',cat:'coffee',name:'Cappuccino',desc:'Velvety milk foam',price:3.8,art:['cup','#a8683a','#f6e7d0']},
+  {id:'lat',cat:'coffee',name:'Latte',desc:'Smooth and creamy',price:4.2,art:['cup','#d9a66b','#fff3df']},
+  {id:'fw',cat:'coffee',name:'Flat White',desc:'Double shot, silky milk',price:4,art:['cup','#c58a52','#fff3df']},
+  {id:'cb',cat:'coffee',name:'Cold Brew',desc:'Steeped for 18 hours',price:4.5,art:['glass','#4a2a18','ice']},
+  {id:'hc',cat:'coffee',name:'Hot Chocolate',desc:'Belgian cocoa, marshmallows',price:4.2,art:['cup','#5a2d1a','m']},
+  {id:'cr',cat:'bakery',name:'Butter Croissant',desc:'Baked fresh at dawn',price:3.2,art:['croissant']},
+  {id:'ch',cat:'bakery',name:'Cheesecake',desc:'With berry compote',price:5.5,art:['slice','#f7efe0','#f3e2c2','#c98a4b','b']},
+  {id:'ti',cat:'bakery',name:'Tiramisu',desc:'Classic, house-made',price:5.8,art:['slice','#6b3d27','#f3e2c2','#e7c99b']},
+  {id:'br',cat:'bakery',name:'Chocolate Brownie',desc:'Warm, with sea salt',price:4,art:['brownie']},
+  {id:'cn',cat:'bakery',name:'Cinnamon Roll',desc:'Cream cheese glaze',price:3.9,art:['roll']},
+  {id:'lt',cat:'bakery',name:'Lemon Tart',desc:'Sharp and sweet',price:4.8,art:['slice','#fff3a8','#f7d84a','#c98a4b']},
+  {id:'at',cat:'breakfast',name:'Avocado Toast',desc:'Sourdough, poached egg',price:8.5,art:['toast']},
+  {id:'om',cat:'breakfast',name:'Omelette',desc:'Three eggs, herbs, cheese',price:7.9,art:['omelette']},
+  {id:'gb',cat:'breakfast',name:'Granola Bowl',desc:'Yoghurt, honey, berries',price:7,art:['bowl']},
+  {id:'pc',cat:'breakfast',name:'Pancakes',desc:'Maple syrup and butter',price:8,art:['pancakes']},
+  {id:'cm',cat:'breakfast',name:'Croque Monsieur',desc:'Ham, cheese, béchamel',price:8.9,art:['croque']},
+  {id:'oj',cat:'breakfast',name:'Fresh Orange Juice',desc:'Squeezed to order',price:4.2,art:['glass','#f59a23','']}
+ ];
+ function pic(d){return d.photo?'<img src="'+esc(d.photo)+'" alt="'+esc(d.name)+'" loading="lazy">':art(d.art)}
+ $('#collage').innerHTML=[['b1',DISHES[1]],['b2',DISHES[6]],['b3',DISHES[12]]].map(function(x){return '<div class="blob '+x[0]+'">'+art(x[1].art)+'</div>'}).join('');
+
+ // ===== Cart =====
+ var cart={},mode='Delivery',view='cart',cat='all',payChoice='cash';
+ function find(id){return DISHES.filter(function(d){return d.id===id})[0]}
+ function nm(d){var x=(T[lang].d||{})[d.id];return x?x[0]:d.name}
+ function ds(d){var x=(T[lang].d||{})[d.id];return x?x[1]:d.desc}
+ function pr(d){return cv(d.price)}
+ function totals(){
+  var sub=0,n=0;Object.keys(cart).forEach(function(id){sub+=pr(find(id))*cart[id];n+=cart[id]});
+  sub=Math.round(sub*100)/100;
+  var fee=mode==='Delivery'&&sub>0&&sub<cv(FREE_FROM)?cv(FEE):0;
+  return {sub:sub,n:n,fee:fee,total:Math.round((sub+fee)*100)/100};
+ }
+ function renderGrid(){
+  $('#grid').innerHTML=DISHES.filter(function(d){return cat==='all'||d.cat===cat}).map(function(d,i){
+   var q=cart[d.id]||0;
+   var ctl=q?'<div class="qty"><button data-d="'+d.id+'" data-s="-1" aria-label="'+esc(t('remove1'))+'">−</button><span>'+q+'</span><button data-d="'+d.id+'" data-s="1" aria-label="'+esc(t('add1'))+'">+</button></div>':'<button class="add" data-d="'+d.id+'" data-s="1">'+esc(t('add'))+'</button>';
+   return '<article class="card" style="animation-delay:'+(i*40)+'ms"><div class="pic" style="background:'+BG[d.cat]+'">'+pic(d)+'</div><div class="cbody"><h3>'+esc(nm(d))+'</h3><p>'+esc(ds(d))+'</p><div class="buy"><span class="price">'+money(pr(d))+'</span>'+ctl+'</div></div></article>';
+  }).join('');
+ }
+ function change(id,s){
+  cart[id]=(cart[id]||0)+s;if(cart[id]<=0)delete cart[id];
+  var b=$('#cartBtn');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');
+  renderGrid();renderCart();
+ }
+ function renderCart(){
+  var tt=totals();$('#cartN').textContent=tt.n;
+  var ids=Object.keys(cart);
+  $('#lines').innerHTML=ids.length?ids.map(function(id){var d=find(id);return '<div class="line"><div class="t" style="background:'+BG[d.cat]+'">'+pic(d)+'</div><div class="m">'+esc(nm(d))+'<small>'+money(pr(d))+'</small></div><div class="qty"><button data-d="'+id+'" data-s="-1" aria-label="'+esc(t('remove1'))+'">−</button><span>'+cart[id]+'</span><button data-d="'+id+'" data-s="1" aria-label="'+esc(t('add1'))+'">+</button></div></div>'}).join(''):'<div class="empty">'+t('empty')+'</div>';
+  $('#sum').innerHTML='<div><span>'+t('subtotal')+'</span><span>'+money(tt.sub)+'</span></div><div><span>'+t('row_'+mode)+'</span><span>'+(tt.fee?money(tt.fee):t('free'))+'</span></div><div class="tot"><span>'+t('total')+'</span><span>'+money(tt.total)+'</span></div>';
+  var minD=cv(MIN_DELIVERY),freeD=cv(FREE_FROM);
+  var short=mode==='Delivery'&&tt.sub>0&&tt.sub<minD;
+  $('#minNote').textContent=short?t('min_note',{min:money(minD),more:money(minD-tt.sub)}):(mode==='Delivery'&&tt.sub>0&&tt.sub<freeD?t('free_note',{more:money(freeD-tt.sub)}):'');
+  $('#mainBtn').disabled=!tt.n;
+ }
+ document.addEventListener('click',function(e){
+  var b=e.target.closest('[data-d]');if(b)change(b.getAttribute('data-d'),+b.getAttribute('data-s'));
+ });
+ $$('.chip').forEach(function(c){c.addEventListener('click',function(){cat=c.getAttribute('data-cat');$$('.chip').forEach(function(x){x.classList.toggle('on',x===c)});renderGrid()})});
+
+ // ===== Payment methods (depend on currency) =====
+ function buildPay(){
+  var opts=PAYMENTS.filter(function(p){return !p.only||p.only.indexOf(cur)>-1});
+  if(!opts.some(function(p){return p.id===payChoice}))payChoice=opts[0].id;
+  $('#pay').innerHTML=opts.map(function(p){return '<option value="'+p.id+'"'+(p.id===payChoice?' selected':'')+'>'+ICON[p.id]+' '+esc(t('p_'+p.id))+'</option>'}).join('');
+ }
+ $('#pay').addEventListener('change',function(){payChoice=this.value});
+
+ // ===== Language / currency =====
+ function applyLang(){
+  document.documentElement.lang=lang;
+  $$('[data-i18n]').forEach(function(el){el.textContent=t(el.getAttribute('data-i18n'))});
+  $$('[data-i18n-html]').forEach(function(el){el.innerHTML=t(el.getAttribute('data-i18n-html'))});
+  document.title=t('title');
+  var md=$('meta[name="description"]');if(md)md.setAttribute('content',t('meta'));
+  $('#cartBtn').setAttribute('aria-label',t('cart'));
+  $('#feeInfo').textContent=t('fee_info',{fee:money(cv(FEE)),free:money(cv(FREE_FROM))});
+  buildPay();renderGrid();renderCart();setView(view);
+ }
+ $('#langSel').value=lang;$('#curSel').value=cur;
+ $('#langSel').addEventListener('change',function(){lang=this.value;save('lang',lang);applyLang()});
+ $('#curSel').addEventListener('change',function(){cur=this.value;save('cur',cur);applyLang()});
+
+ // ===== Drawer =====
+ var drawer=$('#drawer'),ov=$('#ov'),lastFocus=null;
+ function setView(v){
+  view=v;['cart','form','done'].forEach(function(n){$('#v'+n[0].toUpperCase()+n.slice(1)).classList.toggle('on',n===v)});
+  $('#dTitle').textContent=v==='cart'?t('cart_t'):v==='form'?t('checkout_t'):t('thanks_t');
+  $('#foot').style.display=v==='done'?'none':'block';
+  $('#mainBtn').textContent=v==='form'?t('place'):t('checkout');
+ }
+ function openD(){lastFocus=document.activeElement;if(view==='done')setView('cart');drawer.classList.add('open');ov.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}
+ function closeD(){drawer.classList.remove('open');ov.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+ $('#cartBtn').addEventListener('click',openD);$('#dClose').addEventListener('click',closeD);ov.addEventListener('click',closeD);$('#doneBtn').addEventListener('click',closeD);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&drawer.classList.contains('open'))closeD()});
+ $('#backBtn').addEventListener('click',function(){setView('cart')});
+ $$('.seg button').forEach(function(b){b.addEventListener('click',function(){mode=b.getAttribute('data-mode');$$('.seg button').forEach(function(x){x.classList.toggle('on',x===b)});$('#addrBox').style.display=mode==='Delivery'?'block':'none';renderCart()})});
+
+ function setErr(id,m){var el=$('#'+id);el.classList.toggle('bad',!!m);$('[data-for="'+id+'"]').textContent=m||'';return !m}
+ $$('#form input').forEach(function(el){el.addEventListener('input',function(){if(el.id)setErr(el.id,'')})});
+ function toast(m){var x=$('#toast');x.textContent=m;x.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){x.classList.remove('show')},2800)}
+ function finish(total,pm){
+  var online=pm==='card'||pm==='paypal'||pm==='ideal';
+  var url=online&&PAY_LINKS[pm]?PAY_LINKS[pm].split('{amount}').join(total.toFixed(2)).split('{currency}').join(cur):'';
+  var txt=t('done_p',{mode:t('ml_'+mode),total:money(total)});
+  var pl=$('#payLink');
+  if(url){pl.href=url;pl.textContent='🔒 '+t('pay_now',{total:money(total)});pl.style.display='inline-block'}
+  else{pl.style.display='none';if(online)txt+=' '+t('pay_soon')}
+  $('#doneText').textContent=txt;
+  cart={};$('#form').reset();buildPay();renderGrid();renderCart();setView('done');
+ }
+ $('#mainBtn').addEventListener('click',function(){
+  var tt=totals();if(!tt.n)return;
+  if(view==='cart'){
+   if(mode==='Delivery'&&tt.sub<cv(MIN_DELIVERY)){toast(t('min_toast',{min:money(cv(MIN_DELIVERY))}));return}
+   setView('form');return;
+  }
+  var v=function(id){return $('#'+id).value.trim()},ok=true;
+  ok=setErr('name',v('name').length<2?t('e_name'):'')&&ok;
+  ok=setErr('phone',!/^[+()\d\s-]{7,}$/.test(v('phone'))?t('e_phone'):'')&&ok;
+  if(mode==='Delivery')ok=setErr('address',v('address').length<5?t('e_addr'):'')&&ok;
+  if(!ok)return;
+  // The order text for the cafe is always written in English
+  var lines=Object.keys(cart).map(function(id){var d=find(id);return cart[id]+' x '+d.name+' ('+money(pr(d)*cart[id])+')'}).join('\n');
+  var payEn=T.en['p_'+payChoice];
+  var order=lines+'\nSubtotal: '+money(tt.sub)+'\nDelivery: '+money(tt.fee)+'\nTOTAL: '+money(tt.total)+'\nCurrency: '+cur+'\nCustomer language: '+lang;
+  var fe=$('#formErr');fe.textContent='';
+  var pm=payChoice,total=tt.total;
+  if(CHECKOUT_API&&(pm==='card'||pm==='paypal'||pm==='ideal')){
+   var btn0=$('#mainBtn');btn0.disabled=true;btn0.textContent=t('sending');
+   fetch(CHECKOUT_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:cart,mode:mode,currency:cur,lang:lang,name:v('name'),phone:v('phone'),address:mode==='Delivery'?v('address'):'',comment:v('comment')})})
+    .then(function(r){return r.json().then(function(j){if(!r.ok||!j.url)throw new Error(j.error||'HTTP '+r.status);return j})})
+    .then(function(j){window.location.href=j.url})
+    .catch(function(){fe.textContent=t('e_send');btn0.disabled=false;btn0.textContent=t('place')});
+   return;
+  }
+  if(!FORM_ENDPOINT){
+   var body='Type: '+mode+'\nName: '+v('name')+'\nPhone: '+v('phone')+(mode==='Delivery'?'\nAddress: '+v('address'):'')+'\nPayment: '+payEn+'\nComment: '+v('comment')+'\n\n'+order;
+   window.location.href='mailto:'+CAFE_EMAIL+'?subject='+encodeURIComponent('New order')+'&body='+encodeURIComponent(body);
+   finish(total,pm);return;
+  }
+  var fd=new FormData($('#form'));fd.set('payment',payEn);fd.append('type',mode);fd.append('order',order);fd.append('total',money(total));fd.append('currency',cur);fd.append('language',lang);
+  var btn=$('#mainBtn');btn.disabled=true;btn.textContent=t('sending');
+  fetch(FORM_ENDPOINT,{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+   .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);finish(total,pm)})
+   .catch(function(){fe.textContent=t('e_send')})
+   .then(function(){btn.disabled=false;if(view==='form')btn.textContent=t('place')});
+ });
+
+ // ===== Misc =====
+ var burger=$('#burger'),nav=$('#navList');
+ burger.addEventListener('click',function(){var o=!nav.classList.contains('open');nav.classList.toggle('open',o);burger.setAttribute('aria-expanded',o)});
+ $$('#navList a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open')})});
+ $('#top').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+ var els=$$('.rv');
+ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});els.forEach(function(el){io.observe(el)})}else{els.forEach(function(el){el.classList.add('in')})}
+ T.en.paid_ok='Payment received — thank you! Your order is being prepared.';
+ T.ru.paid_ok='Оплата прошла — спасибо! Ваш заказ готовится.';
+ T.uk.paid_ok='Оплата пройшла — дякуємо! Ваше замовлення готується.';
+ T.nl.paid_ok='Betaling ontvangen — bedankt! Je bestelling wordt bereid.';
+ applyLang();
+ try{
+  var qs=new URLSearchParams(location.search);
+  if(qs.get('paid')==='1'){history.replaceState(null,'',location.pathname);setView('done');$('#payLink').style.display='none';$('#doneText').textContent=t('paid_ok');openD()}
+  else if(qs.get('canceled')==='1'){history.replaceState(null,'',location.pathname)}
+ }catch(e){}
+})();
+</script>
+</body>
+</html>
